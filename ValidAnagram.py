@@ -17,14 +17,17 @@ Output: false
 """
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        sh = 0
-        th = 0
-        for char in s:
-            sh += ord(char)
-        for char in t:
-            th += ord(char)
-        if sh == th:
-            return True
-        else: return False
+        if len(s) != len(t):
+            return False
+
+        countS, countT = {},{}
+        for num in range(len(s)):
+            countS[s[num]] = 1 + countS.get(s[num],0)
+            countT[t[num]] = 1 + countT.get(t[num],0)
+
+        for count in countS:
+            if countS[count] != countT.get(count,0):
+                return False
+        return True
 
         
